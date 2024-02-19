@@ -17,13 +17,7 @@ pipeline {
         stage('Deploy to Apache Tomcat') {
             steps {
                 script {
-                    def warFile = sh(returnStdout: true, script: 'find . -name "*.war"').trim()
-                    if (warFile) {
-                        sh "cp ${warFile} /path/to/apache-tomcat/webapps/"
-                        echo "WAR file copied to Apache Tomcat webapps directory."
-                    } else {
-                        error "No WAR file found."
-                    }
+                 sh "cp target/app.war /home/ubuntu/apache-tomcat-8.5.98/webapps"
                 }
             }
         }
