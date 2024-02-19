@@ -1,34 +1,31 @@
 pipeline {
-    agent {
-        label 'demm' 
-    }
-    parameters{
-          choice choices: ['172.17.0.3', '172.17.0.4'], description: 'kk', name: 'deployEnv'
-    }
+    agent any
+    
     stages {
-        stage("clone")
-        {
-        steps{
-                git branch: "main", url: "https://github.com/Pundir26/my-app.git"
+        stage('Clone') {
+            steps {
+                git 'https://github.com/danish2109f/my-app.git'
             }
-
-        }
-        stage("Build")
-        {
-        steps{
-            sh "mvn package"
-            }
-
-        }
-        stage("deploy")
-        {
-            steps
-            {
-                sh "scp target/app.war sp@${deployEnv}:/home/sp/apache-tomcat-9.0.83/webapps"
-
-            }
-
         }
         
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        
+        stage('Deploy to Apache Tomcat') {
+            steps {
+                script {
+                    def warFile = sh(returnStdout: true, script: 'find . -name "*.war"').trim()
+                    if (warFile) {
+                        sh "cp ${warFile} /path/to/apache-tomcat/webapps/"
+                        echo "WAR file copied to Apache Tomcat webapps directory."
+                    } else {
+                        error "No WAR file found."
+                    }
+                }
+            }
+        }
     }
 }
