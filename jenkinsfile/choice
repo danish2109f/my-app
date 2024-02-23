@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy to Apache Tomcat') {
             steps {
                 script {
-                 sh "cp target/app.war /home/ubuntu/apache-tomcat-8.5.98/webapps"
+                 sh "cp target/app.war /home/ubuntu/apache-tomcat-9.0.86/webapps"
                 }
             }
         }
