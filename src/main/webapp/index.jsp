@@ -148,7 +148,7 @@ nav .menu{
     <div class="title">Create Amazing Website</div>
     <div class="sub_title">Pure HTML & CSS Only</div>
     <div class="btns">
-      <button>spiderman absolutely nowAyhome</button>
+      <button>spiderman absolutely nnowAyhome</button>
       <button>button2</button> 
       <button>button3</button>
     </div>
